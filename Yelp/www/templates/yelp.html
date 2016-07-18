@@ -3,7 +3,7 @@
         <form id="yelp-form1" class="list ">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Search">
+                <input type="search" placeholder="Search" ng-model="searchCriteria.searchTerm">
             </label>
         </form>
         <div>
@@ -16,62 +16,31 @@
         <form id="yelp-form7" class="list ">
             <label class="item item-input nearMe" id="yelp-input2">
                 <span class="input-label">Near:</span>
-                <input type="text" placeholder="Current Location">
+                <input type="text" ng-model="searchCriteria.cityLocation" placeholder="Current Location"  ng-keypress="searchAction($event)">
             </label>
         </form>
-        <div class="list card manual-card-fullwidth " id="yelp-card21">
-            <div class=" item item-image">
-                <a style="display:block;" ui-sref="details">
-                    <img src="img/LPn7RoOcQ6y9q8ienrmq_snap.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-                </a>
-            </div>
-            <ion-item class="assertive  titleCard" id="yelp-list-item2" ui-sref="details">Fuck you burgers and asados</ion-item>
-            <div>
-                <div class="ratingBlock">
-                    <div class="ratingStars">[ratings]</div>
-                    <div class="ratingPrice">$$&nbsp;&nbsp;|&nbsp;&nbsp;category&nbsp;&nbsp;|&nbsp;&nbsp;24mi</div>
-                    <div style="clear:both"></div>
+
+        <div ng-repeat="business in businesses">
+            <div class="list card manual-card-fullwidth " id="yelp-card21">
+                <div class=" item item-image">
+                    <a style="display:block;" ui-sref="details">
+                        <img src="{{business.image_url}}" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                    </a>
                 </div>
-            </div>
-        </div>
-        <div class="list card manual-card-fullwidth " id="yelp-card22">
-            <div class=" item item-image">
-                <img src="img/LPn7RoOcQ6y9q8ienrmq_snap.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-            </div>
-            <ion-item class="assertive  titleCard" id="yelp-list-item5" href="mailto:">Fuck you burgers and asados</ion-item>
-            <div>
-                <div class="ratingBlock">
-                    <div class="ratingStars">[ratings]</div>
-                    <div class="ratingPrice">$$&nbsp;&nbsp;|&nbsp;&nbsp;category&nbsp;&nbsp;|&nbsp;&nbsp;24mi</div>
-                    <div style="clear:both"></div>
+                <ion-item class="assertive  titleCard" id="yelp-list-item2" ui-sref="details">{{business.name}}</ion-item>
+                <div>
+                    <div class="ratingBlock">
+                        <div class="ratingStars"><img src="{{business.rating_img_url_small}}"/></div>
+                            <!-- https://groups.google.com/forum/#!topic/yelp-developer-support/wWS3kgLOW3s --> 
+                            <div class="ratingPrice">&nbsp;&nbsp;
+                            <span ng-repeat="category in business.categories">{{category[0]}} </span>
+                            &nbsp;&nbsp;|&nbsp;&nbsp;{{business.distance}}</div>
+                        <div style="clear:both"></div>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
-        <div class="list card manual-card-fullwidth " id="yelp-card23">
-            <div class=" item item-image">
-                <img src="img/LPn7RoOcQ6y9q8ienrmq_snap.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-            </div>
-            <ion-item class="assertive  titleCard" id="yelp-list-item6" href="mailto:">Fuck you burgers and asados</ion-item>
-            <div>
-                <div class="ratingBlock">
-                    <div class="ratingStars">[ratings]</div>
-                    <div class="ratingPrice">$$&nbsp;&nbsp;|&nbsp;&nbsp;category&nbsp;&nbsp;|&nbsp;&nbsp;24mi</div>
-                    <div style="clear:both"></div>
-                </div>
-            </div>
-        </div>
-        <div class="list card manual-card-fullwidth " id="yelp-card211">
-            <div class=" item item-image">
-                <img src="img/LPn7RoOcQ6y9q8ienrmq_snap.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-            </div>
-            <ion-item class="assertive  titleCard" id="yelp-list-item22" href="mailto:">Fuck you burgers and asados</ion-item>
-            <div>
-                <div class="ratingBlock">
-                    <div class="ratingStars">[ratings]</div>
-                    <div class="ratingPrice">$$&nbsp;&nbsp;|&nbsp;&nbsp;category&nbsp;&nbsp;|&nbsp;&nbsp;24mi</div>
-                    <div style="clear:both"></div>
-                </div>
-            </div>
-        </div>
+
+
     </ion-content>
 </ion-view>
